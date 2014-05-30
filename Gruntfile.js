@@ -16,7 +16,7 @@ module.exports = function(grunt) {
             lib: {
                 options: {},
                 src: ['lib/*.js']
-            },
+            }
         },
         watch: {
             scripts: {
@@ -24,12 +24,12 @@ module.exports = function(grunt) {
                 tasks: ['jshint', 'uglify'],
                 options: {
                     interrupt: true
-                },
+                }
             },
             gruntfile: {
                 files: 'Gruntfile.js'
             }
-        },
+        }
     });
 
     // Load all grunt tasks
