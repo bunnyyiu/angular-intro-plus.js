@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['angular-intro']);
+var app = angular.module('myApp', ['angular-intro-plus']);
 
 app.controller('MyController', function ($scope) {
 
@@ -22,7 +22,7 @@ app.controller('MyController', function ($scope) {
         console.log("After Change Event called");
     };
 
-    $scope.IntroOptions = {
+    $scope.IntroPlusOptions = {
         steps:[
         {
             element: document.querySelector('#step1'),

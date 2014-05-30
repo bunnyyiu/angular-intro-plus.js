@@ -8,8 +8,8 @@ module.exports = function(grunt) {
                 banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */\n'
             },
             build: {
-                src: 'src/angular-intro.js',
-                dest: 'build/angular-intro.min.js'
+                src: 'src/angular-intro-plus.js',
+                dest: 'build/angular-intro-plus.min.js'
             }
         },
         jshint: {
