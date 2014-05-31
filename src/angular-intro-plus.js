@@ -56,7 +56,6 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              */
             createChildHelpIcons = function () {
                 aelChildHelpIcons = [];
-                console.log('htOptions', htOptions)
                 angular.forEach(htOptions.steps, function (currentItem, i) {
 
                     var el = $(currentItem.element),
@@ -68,7 +67,6 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                         aelChildHelpIcons.push(false);
                         return;
                     }
-                    console.log('newEl', newEl)
                     newEl.appendTo('body');
                     newEl.css('top', offset.top + (height/2 - newEl.height()/2) + 'px');
                     newEl.css('left', offset.left + (width/2 - newEl.width()/2) + 'px');
@@ -87,7 +85,6 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              * remove child help icons
              */
             removeChildHelpIcons = function () {
-                console.log('removeChildHelpIcons', removeChildHelpIcons);
                 for(var k in aelChildHelpIcons) {
                     if (aelChildHelpIcons[k]) {
                         aelChildHelpIcons[k].remove();
@@ -124,7 +121,6 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                 if (!oIntro) {
                     oIntro = introJs();
 
-                    console.log('htOptions', htOptions);
                     oIntro.setOptions(htOptions);
 
                     if(attrs.ngIntroOncomplete) {
