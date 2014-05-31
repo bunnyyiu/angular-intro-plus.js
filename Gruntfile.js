@@ -12,6 +12,16 @@ module.exports = function(grunt) {
                 dest: 'build/angular-intro-plus.min.js'
             }
         },
+        cssmin: {
+            add_banner: {
+                options: {
+                    banner: '/*! <%= pkg.name %> <%= grunt.template.today("yyyy-mm-dd") %> */'
+                },
+                files: {
+                    'build/angular-intro-plus.min.css': ['src/angular-intro-plus.css']
+                }
+            }
+        },
         jshint: {
             lib: {
                 options: {},
@@ -21,7 +31,7 @@ module.exports = function(grunt) {
         watch: {
             scripts: {
                 files: 'lib/*.js',
-                tasks: ['jshint', 'uglify'],
+                tasks: ['jshint', 'uglify', 'cssmin'],
                 options: {
                     interrupt: true
                 }
@@ -36,5 +46,5 @@ module.exports = function(grunt) {
     require('load-grunt-tasks')(grunt);
 
     // Default task(s).
-    grunt.registerTask('default', ['jshint', 'uglify']);
+    grunt.registerTask('default', ['jshint', 'uglify', 'cssmin']);
 };
