@@ -1,8 +1,8 @@
 {
-  "name": "angular-intro.js",
+  "name": "angular-intro-plus.js",
   "version": "0.1.0",
   "description": "Angular directive to wrap intro.js",
-  "main": "angular-intro.js",
+  "main": "angular-intro-plus.js",
   "directories": {
     "example": "example",
     "lib": "lib"
@@ -12,19 +12,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/mendhak/angular-intro.js.git"
+    "url": "git://github.com/iamdenny/angular-intro-plus.js.git"
   },
   "keywords": [
     "angular",
     "intro.js",
-    "angular-intro"
+    "angular-intro-plus"
   ],
-  "author": "mendhak",
+  "author": "Denny Lim",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/mendhak/angular-intro.js/issues"
+    "url": "https://github.com/iamdenny/angular-intro-plus.js/issues"
   },
-  "homepage": "https://github.com/mendhak/angular-intro.js",
+  "homepage": "http://angular-intro-plus.iamdenny.com",
   "devDependencies": {
     "grunt": "~0.4.4",
     "grunt-contrib-jshint": "~0.9.2",
