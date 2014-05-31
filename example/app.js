@@ -48,13 +48,7 @@ app.controller('MyController', function ($scope) {
             intro: 'Get it, use it.'
         }
         ],
-        showStepNumbers: false,
-        exitOnOverlayClick: true,
-        exitOnEsc:true,
-        nextLabel: '<strong>NEXT!</strong>',
-        prevLabel: '<span style="color:green">Previous</span>',
-        skipLabel: 'Exit',
-        doneLabel: 'Thanks'
+        helpIcons: '<span class="glyphicon glyphicon-question-sign" style="position:absolute;color:#fff;font-size:24px;z-index:1000000;cursor:pointer;"></span>'
     };
 
 });
