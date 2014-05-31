@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['angular-intro']);
+var app = angular.module('myApp', ['angular-intro-plus']);
 
 app.controller('MyController', function ($scope) {
 
@@ -22,31 +22,31 @@ app.controller('MyController', function ($scope) {
         console.log("After Change Event called");
     };
 
-    $scope.IntroOptions = {
+    $scope.IntroPlusOptions = {
         steps:[
-        {
-            element: document.querySelector('#step1'),
-            intro: "This is the first tooltip."
-        },
-        {
-            element: document.querySelectorAll('#step2')[0],
-            intro: "<strong>You</strong> can also <em>include</em> HTML",
-            position: 'right'
-        },
-        {
-            element: '#step3',
-            intro: 'More features, more fun.',
-            position: 'left'
-        },
-        {
-            element: '#step4',
-            intro: "Another step.",
-            position: 'bottom'
-        },
-        {
-            element: '#step5',
-            intro: 'Get it, use it.'
-        }
+            {
+                element: document.querySelector('#step1'),
+                intro: "This is the first tooltip."
+            },
+            {
+                element: document.querySelectorAll('#step2')[0],
+                intro: "<strong>You</strong> can also <em>include</em> HTML",
+                position: 'right'
+            },
+            {
+                element: '#step3',
+                intro: 'More features, more fun.',
+                position: 'left'
+            },
+            {
+                element: '#step4',
+                intro: "Another step.",
+                position: 'bottom'
+            },
+            {
+                element: '#step5',
+                intro: 'Get it, use it.'
+            }
         ],
         showStepNumbers: false,
         exitOnOverlayClick: true,
