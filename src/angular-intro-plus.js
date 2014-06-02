@@ -135,15 +135,15 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                         }
                     });
 
-                    if(attrs.ngIntroOnchange) {
+                    if(attrs.ngIntroPlusOnchange) {
                         oIntro.onchange($parse(attrs.ngIntroPlusOnchange)(scope));
                     }
 
-                    if(attrs.ngIntroOnbeforechange) {
+                    if(attrs.ngIntroPlusOnbeforechange) {
                         oIntro.onbeforechange($parse(attrs.ngIntroPlusOnbeforechange)(scope));
                     }
 
-                    if(attrs.ngIntroOnafterchange) {
+                    if(attrs.ngIntroPlusOnafterchange) {
                         oIntro.onafterchange($parse(attrs.ngIntroPlusOnafterchange)(scope));
                     }
 
