@@ -205,6 +205,7 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                 if (oIntro) {
                     oIntro.exit();
                     oIntro = false;
+
                     $('.introjs-overlay').remove();
                     $('.introjs-helperLayer').remove();
                 }
