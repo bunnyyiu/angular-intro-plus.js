@@ -71,7 +71,6 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              */
             createChildHelpIcons = function () {
                 aelChildHelpIcons = [];
-                window.aa=[];
                 angular.forEach(htOptions.steps, function (currentItem, i) {
 
                     var el = $(currentItem.element),
