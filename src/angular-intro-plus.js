@@ -1,9 +1,9 @@
 var ngIntroDirective = angular.module('angular-intro-plus', []);
 
 /**
-* TODO: Use isolate scope, but requires angular 1.2: http://plnkr.co/edit/a2c14O?p=preview
-* See: http://stackoverflow.com/q/18796023/237209
-*/
+ * TODO: Use isolate scope, but requires angular 1.2: http://plnkr.co/edit/a2c14O?p=preview
+ * See: http://stackoverflow.com/q/18796023/237209
+ */
 
 ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function ($timeout, $parse) {
 
@@ -81,10 +81,12 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
 
                     // @todo might be changed this to isVisible module
                     if (el.css('display') === 'none' ||
-                        (offset.top === 0 && offset.left === 0)) {
+                        (offset.top === 0 && offset.left === 0) ||
+                        width < 1 || height < 1) {
                         aelChildHelpIcons.push(false);
                         return;
                     }
+                    console.log(currentItem.element, offset, width, height)
                     newEl.appendTo('body');
                     newEl.addClass('introjs-plus-help-icon');
                     newEl.css('top', offset.top + (height/2 - newEl.height()/2) + 'px');
@@ -251,10 +253,8 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              */
             scope[attrs.ngIntroPlusRefreshHelpIcons] = function () {
                 if (elPlusOverlay) {
-                    $timeout(function () {
-                        removeChildHelpIcons();
-                        createChildHelpIcons();
-                    }, 100);
+                    removeChildHelpIcons();
+                    createChildHelpIcons();
                 }
             };
 
