@@ -252,8 +252,10 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              */
             scope[attrs.ngIntroPlusRefreshHelpIcons] = function () {
                 if (elPlusOverlay) {
-                    removeChildHelpIcons();
-                    createChildHelpIcons();
+                    $timeout(function () {
+                        removeChildHelpIcons();
+                        createChildHelpIcons();
+                    });
                 }
             };
 
