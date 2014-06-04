@@ -22,8 +22,24 @@ app.controller('MyController', function ($scope) {
         console.log("After Change Event called");
     };
 
+    $scope.BeforeOverlayCreation = function () {
+        console.log('BeforeOverlayCreation');
+    };
+
+    $scope.AfterOverlayCreation = function () {
+        console.log('AfterOverlayCreation');
+    };
+
+    $scope.BeforeOverlayRemoval = function () {
+        console.log('BeforeOverlayRemoval');
+    };
+
+    $scope.AfterOverlayRemoval = function () {
+        console.log('AfterOverlayRemoval');
+    };
+
     $scope.IntroPlusOptions = {
-        steps:[
+        steps: [
             {
                 element: document.querySelector('#step1'),
                 intro: "This is the first tooltip."
@@ -46,16 +62,20 @@ app.controller('MyController', function ($scope) {
             {
                 element: '#step5',
                 intro: 'Get it, use it.'
+            },
+            {
+                element: '#hiddenText',
+                intro: 'Hidden Text are shown.'
             }
         ],
-        showStepNumbers: false,
-        exitOnOverlayClick: true,
-        exitOnEsc:true,
-        nextLabel: '<strong>NEXT!</strong>',
-        prevLabel: '<span style="color:green">Previous</span>',
-        skipLabel: 'Exit',
-        doneLabel: 'Thanks'
+        helpIcons: '<span class="glyphicon glyphicon-question-sign" style="position:absolute;color:#fff;font-size:24px;z-index:1000000;cursor:pointer;"></span>'
     };
+
+    $scope.$watch('bShowHiddenText', function (newValue, oldValue) {
+        if (angular.isDefined(newValue)) {
+            $scope.refreshHelpIcons();
+        }
+    });
 
 });
 
