@@ -86,7 +86,6 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                         aelChildHelpIcons.push(false);
                         return;
                     }
-                    console.log(currentItem.element, offset, width, height)
                     newEl.appendTo('body');
                     newEl.addClass('introjs-plus-help-icon');
                     newEl.css('top', offset.top + (height/2 - newEl.height()/2) + 'px');
