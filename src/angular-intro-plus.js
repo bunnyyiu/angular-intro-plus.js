@@ -80,7 +80,9 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                         height = el.height(),
                         newEl = $(htOptions.helpIcons || '<span class="glyphicon glyphicon-question-sign" style="position:absolute;color:#fff;font-size:24px;z-index:1000000;cursor:pointer;"></span>');
 
-                    if (el.css('display') === 'none') {
+                    // @todo might be changed this to isVisible module
+                    if (el.css('display') === 'none' ||
+                        (offset.top === 0 && offset.left === 0)) {
                         aelChildHelpIcons.push(false);
                         return;
                     }
