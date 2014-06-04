@@ -18,7 +18,7 @@
 
 </head>
 
-<body >
+<body>
 
 <div class="container-narrow" ng-controller="MyController"
      ng-intro-plus-options="IntroPlusOptions" ng-intro-plus-show="CallMe"
@@ -26,12 +26,17 @@
      ng-intro-plus-on-change="ChangeEvent" ng-intro-plus-on-before-change="BeforeChangeEvent"
      ng-intro-plus-on-after-change="AfterChangeEvent"
      ng-intro-plus-autostart="false"
-     ng-intro-plus-on-before-overlay-creation="BeforeOverlayCreation" ng-intro-plus-on-before-overlay-removal="BeforeOverlayRemoval"
-     ng-intro-plus-on-after-overlay-creation="AfterOverlayCreation" ng-intro-plus-on-after-overlay-removal="AfterOverlayRemoval">
+     ng-intro-plus-on-before-overlay-creation="BeforeOverlayCreation"
+     ng-intro-plus-on-before-overlay-removal="BeforeOverlayRemoval"
+     ng-intro-plus-on-after-overlay-creation="AfterOverlayCreation"
+     ng-intro-plus-on-after-overlay-removal="AfterOverlayRemoval"
+     ng-intro-plus-hide="hideMe"
+     ng-intro-plus-hide-help-box="hideHelpBox">
 
     <div class="masthead">
         <ul id="step5" class="nav nav-pills pull-right">
-            <li><a href="https://github.com/iamdenny/angular-intro-plus.js/tree/master/build"><i class='icon-black icon-download-alt'></i> Download</a></li>
+            <li><a href="https://github.com/iamdenny/angular-intro-plus.js/tags"><i
+                    class='icon-black icon-download-alt'></i> Download</a></li>
             <li><a href="https://github.com/iamdenny/angular-intro-plus.js">Github</a></li>
         </ul>
         <h3 class="muted">ng-intro-plus</h3>
@@ -39,7 +44,10 @@
 
     <div class="jumbotron">
         <h1 id="step1">Angular Intro Plus.js</h1>
-        <p id="step4" class="lead">AngularJS directives for <a href="http://usablica.github.io/intro.js/" onclick="window.open(this.href);return false;">intro.js</a></p>
+
+        <p id="step4" class="lead">AngularJS directives for <a href="http://usablica.github.io/intro.js/"
+                                                               onclick="window.open(this.href);return false;">intro.js</a>
+        </p>
         <a class="btn btn-large btn-success" ng-click="CallMe();">Demo</a>
 
     </div>
@@ -48,26 +56,40 @@
     <div class="row marketing">
         <div id="step2" class="col-md-6">
             <h4>Setup</h4>
-            <p>Include the JS and CSS files for intro.js, and angular-intro-plus.min.js.  Add the module <code>angular-intro-plus</code> to your app declaration.</p>
+
+            <p>Include the JS and CSS files for intro.js, and angular-intro-plus.min.js. Add the module <code>angular-intro-plus</code>
+                to your app declaration.</p>
 
             <h4>Options</h4>
-            <p>Set the options like so: <code>ng-intro-plus-options="IntroPlusOptions"</code>. Define <code>$scope.IntroPlusOptions</code> in your controller.  The format is only same the steps of <a href="https://github.com/usablica/intro.js#options">original</a>.</p>
+
+            <p>Set the options like so: <code>ng-intro-plus-options="IntroPlusOptions"</code>. Define <code>$scope.IntroPlusOptions</code>
+                in your controller. The format is only same the steps of <a
+                        href="https://github.com/usablica/intro.js#options">original</a>.</p>
 
             <h4>Method name</h4>
-            <p>Pick a method name, <code>ng-intro-plus-show="CallMe"</code>. You can invoke the intro from elsewhere by calling <code>CallMe();</code>. To autostart, use <code>ng-intro-plus-autostart="true"</code></p>
+
+            <p>Pick a method name, <code>ng-intro-plus-show="CallMe"</code>. You can invoke the intro from elsewhere by
+                calling <code>CallMe();</code>. To autostart, use <code>ng-intro-plus-autostart="true"</code></p>
 
             <h4>Callbacks</h4>
+
             <p>You can get callbacks to your controller using the <code>ng-intro-plus-on-complete</code>,
                 <code>ng-intro-plus-on-exit</code>, <code>ng-intro-plus-on-change</code>,
                 <code>ng-intro-plus-on-before-change</code>, <code>ng-intro-plus-on-after-change</code>
-                <code>ng-intro-plus-on-before-overlay-creation</code>, <code>ng-intro-plus-on-after-overlay-creation</code>, and
-                <code>ng-intro-plus-on-before-overlay-removal</code>, <code>ng-intro-plus-on-after-overlay-removal</code> directives.</p>
+                <code>ng-intro-plus-on-before-overlay-creation</code>,
+                <code>ng-intro-plus-on-after-overlay-creation</code>, and
+                <code>ng-intro-plus-on-before-overlay-removal</code>,
+                <code>ng-intro-plus-on-after-overlay-removal</code> directives.</p>
 
-            <p>See <a href="https://github.com/iamdenny/angular-intro-plus.js/blob/master/example/index.html">index.html</a> and <a href="https://github.com/iamdenny/angular-intro-plus.js/blob/master/example/app.js">app.js</a> for usage code.</p>
+            <p>See <a
+                    href="https://github.com/iamdenny/angular-intro-plus.js/blob/master/example/index.html">index.html</a>
+                and <a href="https://github.com/iamdenny/angular-intro-plus.js/blob/master/example/app.js">app.js</a>
+                for usage code.</p>
         </div>
 
         <div id="step3" class="col-md-6">
             <h4><a href="https://github.com/iamdenny/angular-intro-plus.js/tree/master/example">Example</a></h4>
+
             <p>Set the options and method name:
                <pre>
 &lt;div ng-controller="MyController"
@@ -98,7 +120,18 @@ position: 'right'
                 <pre>$scope.CallMe();</pre>
             </p>
 
-             </div>
+            <p>Hide intro
+                <pre>&lt;button ng-click="hideMe();"&gt;Go&lt;/button&gt;</pre>
+                <pre>$scope.hideMe();</pre>
+                <a class="btn btn-small btn-info" ng-click="hideMe();">hide intro</a>
+            </p>
+
+            <p>Hide help box
+                <pre>&lt;button ng-click="hideHelpBox();"&gt;Go&lt;/button&gt;</pre>
+                <pre>$scope.hideHelpBox();</pre>
+                <a class="btn btn-small btn-info" ng-click="hideHelpBox();">hide intro</a>
+            </p>
+        </div>
     </div>
 
     <hr>
