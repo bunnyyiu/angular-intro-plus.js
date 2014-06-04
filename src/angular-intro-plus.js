@@ -37,15 +37,15 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                     removeChildHelpIcons();
                 });
                 elPlusOverlay.appendTo('body');
+                lastHiddenHelpIconsIndex = false;
                 setTimeout(function() {
                     elPlusOverlay.css('opacity', 0.8);
 
                     if (attrs.ngIntroPlusOnAfterOverlayCreation) {
                         scope.$eval(attrs.ngIntroPlusOnAfterOverlayCreation)(scope);
                     }
+                    createChildHelpIcons();
                 }, 10);
-                lastHiddenHelpIconsIndex = false;
-                createChildHelpIcons();
             };
 
             /**
@@ -254,7 +254,7 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                     $timeout(function () {
                         removeChildHelpIcons();
                         createChildHelpIcons();
-                    });
+                    }, 100);
                 }
             };
 
