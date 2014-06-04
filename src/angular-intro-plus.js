@@ -1,9 +1,9 @@
 var ngIntroDirective = angular.module('angular-intro-plus', []);
 
 /**
- * TODO: Use isolate scope, but requires angular 1.2: http://plnkr.co/edit/a2c14O?p=preview
- * See: http://stackoverflow.com/q/18796023/237209
- */
+* TODO: Use isolate scope, but requires angular 1.2: http://plnkr.co/edit/a2c14O?p=preview
+* See: http://stackoverflow.com/q/18796023/237209
+*/
 
 ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function ($timeout, $parse) {
 
@@ -12,11 +12,11 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
         link: function(scope, element, attrs) {
 
             // define variables
-            var elPlusOverlay, aelChildHelpIcons, oIntro, htOptions;
+            var elPlusOverlay, aelChildHelpIcons, oIntro, htOptions, lastHiddenHelpIconsIndex;
 
             // define variables of methods
             var createOverlay, removeOverlay, createChildHelpIcons, removeChildHelpIcons, showChildHelpIcons,
-                hideChildHelpIcon, showIntro, startIntroPlus;
+                hideChildHelpIcon, showIntro, startIntroPlus, exitIntro;
 
             // bootstrap
             elPlusOverlay = false;
@@ -28,6 +28,9 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              * create overlay
              */
             createOverlay = function () {
+                if (attrs.ngIntroPlusOnBeforeOverlayCreation) {
+                    scope.$eval(attrs.ngIntroPlusOnBeforeOverlayCreation)(scope);
+                }
                 elPlusOverlay = $('<div class="introjs-plus-overlay" style="position:fixed;top:0;right:0;bottom:0;left:0;"/>');
                 elPlusOverlay.bind('click', function () {
                     removeOverlay();
@@ -36,7 +39,12 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                 elPlusOverlay.appendTo('body');
                 setTimeout(function() {
                     elPlusOverlay.css('opacity', 0.8);
+
+                    if (attrs.ngIntroPlusOnAfterOverlayCreation) {
+                        scope.$eval(attrs.ngIntroPlusOnAfterOverlayCreation)(scope);
+                    }
                 }, 10);
+                lastHiddenHelpIconsIndex = false;
                 createChildHelpIcons();
             };
 
@@ -44,10 +52,17 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              * remove overlay
              */
             removeOverlay = function () {
+                if (attrs.ngIntroPlusOnBeforeOverlayRemoval) {
+                    scope.$eval(attrs.ngIntroPlusOnBeforeOverlayRemoval)(scope);
+                }
                 elPlusOverlay.css('opacity', 0);
                 setTimeout(function () {
                     elPlusOverlay.remove();
                     elPlusOverlay = false;
+
+                    if (attrs.ngIntroPlusOnAfterOverlayRemoval) {
+                        scope.$eval(attrs.ngIntroPlusOnAfterOverlayRemoval)(scope);
+                    }
                 }, 500);
             };
 
@@ -56,6 +71,7 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              */
             createChildHelpIcons = function () {
                 aelChildHelpIcons = [];
+                window.aa=[];
                 angular.forEach(htOptions.steps, function (currentItem, i) {
 
                     var el = $(currentItem.element),
@@ -63,13 +79,17 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                         width = el.width(),
                         height = el.height(),
                         newEl = $(htOptions.helpIcons || '<span class="glyphicon glyphicon-question-sign" style="position:absolute;color:#fff;font-size:24px;z-index:1000000;cursor:pointer;"></span>');
-                    if (offset.top === 0 && offset.left === 0) {
+
+                    if (el.css('display') === 'none') {
                         aelChildHelpIcons.push(false);
                         return;
                     }
                     newEl.appendTo('body');
                     newEl.css('top', offset.top + (height/2 - newEl.height()/2) + 'px');
                     newEl.css('left', offset.left + (width/2 - newEl.width()/2) + 'px');
+                    if (lastHiddenHelpIconsIndex === i) {
+                        newEl.hide();
+                    }
                     newEl.bind('click', function () {
                         showChildHelpIcons();
                         setTimeout(function () {
@@ -109,6 +129,7 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              */
             hideChildHelpIcon = function (i) {
                 if (aelChildHelpIcons[i]) {
+                    lastHiddenHelpIconsIndex = i;
                     aelChildHelpIcons[i].hide();
                 }
             };
@@ -129,22 +150,22 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
 
                     oIntro.onexit(function () {
                         showChildHelpIcons();
-                        oIntro = false;
-                        if(attrs.ngIntroOnexit) {
-                            scope.$eval(attrs.ngIntroPlusOnexit)(scope);
+                        exitIntro();
+                        if(attrs.ngIntroPlusOnExit) {
+                            scope.$eval(attrs.ngIntroPlusOnExit)(scope);
                         }
                     });
 
-                    if(attrs.ngIntroOnchange) {
-                        oIntro.onchange($parse(attrs.ngIntroPlusOnchange)(scope));
+                    if(attrs.ngIntroPlusOnChange) {
+                        oIntro.onchange($parse(attrs.ngIntroPlusOnChange)(scope));
                     }
 
-                    if(attrs.ngIntroOnbeforechange) {
-                        oIntro.onbeforechange($parse(attrs.ngIntroPlusOnbeforechange)(scope));
+                    if(attrs.ngIntroPlusOnBeforeChange) {
+                        oIntro.onbeforechange($parse(attrs.ngIntroPlusOnBeforeChange)(scope));
                     }
 
-                    if(attrs.ngIntroOnafterchange) {
-                        oIntro.onafterchange($parse(attrs.ngIntroPlusOnafterchange)(scope));
+                    if(attrs.ngIntroPlusOnAfterChange) {
+                        oIntro.onafterchange($parse(attrs.ngIntroPlusOnAfterChange)(scope));
                     }
 
                     if(typeof(step) === 'number') {
@@ -157,6 +178,9 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                 }
             };
 
+            /**
+             * start intro plus
+             */
             startIntroPlus = function () {
                 var inputOptions = scope.$eval(attrs.ngIntroPlusOptions);
                 htOptions = {
@@ -178,10 +202,54 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                 }
             };
 
+            /**
+             * exit intro
+             */
+            exitIntro = function () {
+                if (oIntro) {
+                    oIntro.exit();
+                    oIntro = false;
+                    // remove elements of intro.js immediately, because it makes delay 500ms that interrupt click event
+                    $('.introjs-overlay').remove();
+                    $('.introjs-helperLayer').remove();
+                }
+            };
+
+            /**
+             * ng intro plus show
+             */
             scope[attrs.ngIntroPlusShow] = function() {
                 startIntroPlus();
             };
 
+            /**
+             * ng intro plus hide
+             */
+            scope[attrs.ngIntroPlusHide] = function () {
+                exitIntro();
+                removeChildHelpIcons();
+                removeOverlay();
+            };
+
+            /**
+             * ng intro plus hide help box
+             */
+            scope[attrs.ngIntroPlusHideHelpBox] = function () {
+                exitIntro();
+                showChildHelpIcons();
+            };
+
+            /**
+             * ng intro plus refresh help icons
+             */
+            scope[attrs.ngIntroPlusRefreshHelpIcons] = function () {
+                $timeout(function () {
+                    removeChildHelpIcons();
+                    createChildHelpIcons();
+                });
+            };
+
+            // autostart
             if(attrs.ngIntroAutostart == 'true') {
                 $timeout(function() {
                     $parse(attrs.ngIntroPlusShow)(scope)();
