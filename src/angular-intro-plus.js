@@ -229,27 +229,33 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
              * ng intro plus hide
              */
             scope[attrs.ngIntroPlusHide] = function () {
-                exitIntro();
-                removeChildHelpIcons();
-                removeOverlay();
+                if (elPlusOverlay) {
+                    exitIntro();
+                    removeChildHelpIcons();
+                    removeOverlay();
+                }
             };
 
             /**
              * ng intro plus hide help box
              */
             scope[attrs.ngIntroPlusHideHelpBox] = function () {
-                exitIntro();
-                showChildHelpIcons();
+                if (elPlusOverlay) {
+                    exitIntro();
+                    showChildHelpIcons();
+                }
             };
 
             /**
              * ng intro plus refresh help icons
              */
             scope[attrs.ngIntroPlusRefreshHelpIcons] = function () {
-                $timeout(function () {
-                    removeChildHelpIcons();
-                    createChildHelpIcons();
-                });
+                if (elPlusOverlay) {
+                    $timeout(function () {
+                        removeChildHelpIcons();
+                        createChildHelpIcons();
+                    });
+                }
             };
 
             // autostart
