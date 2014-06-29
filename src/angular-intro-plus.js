@@ -36,6 +36,22 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                     removeOverlay();
                     removeChildHelpIcons();
                 });
+
+                var onKeyDown = function (event) {
+                    var KEYCODE_ESC = 27;
+                    if (elPlusOverlay && event.which == KEYCODE_ESC) {
+                        exitIntro();
+                        removeOverlay();
+                        removeChildHelpIcons();
+                    }
+                };
+
+                $(document).keydown(onKeyDown);
+
+                elPlusOverlay.on('remove', function () {
+                    $(document).unbind('keydown',  onKeyDown);
+                });
+
                 elPlusOverlay.appendTo('body');
                 lastHiddenHelpIconsIndex = false;
                 setTimeout(function() {
