@@ -39,7 +39,7 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
 
                 var onKeyDown = function (event) {
                     var KEYCODE_ESC = 27;
-                    if (elPlusOverlay && event.which == KEYCODE_ESC) {
+                    if (elPlusOverlay && event.which === KEYCODE_ESC) {
                         exitIntro();
                         removeOverlay();
                         removeChildHelpIcons();
@@ -109,13 +109,18 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                     if (lastHiddenHelpIconsIndex === i) {
                         newEl.hide();
                     }
-                    newEl.bind('click', function () {
+                    var displayIntro = function () {
                         showChildHelpIcons();
                         setTimeout(function () {
                             hideChildHelpIcon(i);
                             showIntro(i+1);
                         }, 10);
-                    });
+                    };
+                    if (htOptions.hover) {
+                        newEl.hover(displayIntro);
+                    } else {
+                        newEl.bind('click', displayIntro);
+                    }
                     aelChildHelpIcons.push(newEl);
                 });
             };
@@ -212,7 +217,8 @@ ngIntroDirective.directive('ngIntroPlusOptions', ['$timeout', '$parse', function
                     showBullets: false,
                     overlayOpacity: 0,
                     steps : inputOptions.steps,
-                    helpIcons : inputOptions.helpIcons
+                    helpIcons : inputOptions.helpIcons,
+                    hover: inputOptions.hover
                 };
 
                 if (!elPlusOverlay) {
